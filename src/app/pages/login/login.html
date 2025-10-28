@@ -1,0 +1,54 @@
+<div class="flex items-center justify-center min-h-screen bg-gray-50">
+  <div class="w-full max-w-md bg-white rounded-2xl shadow-md p-8">
+    <h1 class="text-2xl font-semibold text-center mb-6">Sign In</h1>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-5">
+      <!-- Email Field -->
+      <div>
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="Email address"
+          class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
+        />
+
+        @if (email()?.touched && email()?.invalid) {
+        <div class="text-red-500 text-sm mt-1">
+          @if (email()?.errors?.['required']) {
+          <span>Email is required.</span>
+          } @if (email()?.errors?.['email']) {
+          <span>Enter a valid email.</span>
+          }
+        </div>
+        }
+      </div>
+
+      <!-- Password Field -->
+      <div>
+        <input
+          type="password"
+          formControlName="password"
+          placeholder="Password"
+          class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
+        />
+
+        @if (password()?.touched && password()?.invalid) {
+        <div class="text-red-500 text-sm mt-1">
+          @if (password()?.errors?.['required']) {
+          <span>Password is required.</span>
+          }
+        </div>
+        }
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors"
+        [disabled]="loginForm.invalid"
+      >
+        Sign In
+      </button>
+    </form>
+  </div>
+</div>
