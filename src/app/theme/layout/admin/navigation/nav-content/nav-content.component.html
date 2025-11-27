@@ -1,6 +1,17 @@
 <!-- Vertical layout -->
 <ng-scrollbar style="height: calc(100vh - 70px)" visibility="hover">
+  <!-- ⭐ Add Upload Button Here -->
+<div class="p-3">
+  <button class="btn btn-primary w-full" >
+    <i class="ti ti-upload"></i> Upload File
+  </button>
+
+  <!-- Hidden file input -->
+  <input type="file" #fileInput style="display:none"  />
+</div>
   <div class="navbar-content">
+
+    
     <ul class="nav coded-inner-navbar" (click)="fireOutClick()" (keydown.space)="fireOutClick()" (keydown.enter)="fireOutClick()">
       @for (item of navigations; track item) {
         @if (item.type === 'group') {
@@ -12,7 +23,7 @@
         }
       }
     </ul>
-    <div class="pc-navbar-card bg-primary rounded">
+    <!-- <div class="pc-navbar-card bg-primary rounded">
       <h4 class="text-white">Berry Pro</h4>
       <p class="text-white">Checkout Berry Premium Features</p>
       <a
@@ -22,8 +33,8 @@
       >
         Download Premium
       </a>
-    </div>
-    <div class="version">
+    </div> -->
+    <div class="version mt-5">
       <label for="version" disabled class="pe-auto">v{{ currentApplicationVersion }}</label>
     </div>
   </div>
