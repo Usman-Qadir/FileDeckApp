@@ -1,6 +1,6 @@
 <div class="ms-auto">
   <ul class="list-unstyled">
-    <li>
+    <!-- <li>
       <div class="dropdown pc-h-item">
         <a
           class="pc-head-link head-link-primary arrow-none me-0"
@@ -10,7 +10,7 @@
           <i class="ti ti-brand-github"></i>
         </a>
       </div>
-    </li>
+    </li> -->
     <li>
       <div class="dropdown pc-h-item" ngbDropdown>
         <a
@@ -145,15 +145,16 @@
               <span class="small text-muted">John Doe</span>
             </h4>
             <p class="text-muted">Project Admin</p>
-            <form class="header-search">
+            <hr />
+            <!-- <form class="header-search">
               <div class="search-btn">
                 <i class="ti ti-search"></i>
               </div>
-              <input type="search" class="form-control" placeholder="Search profile options" />
-            </form>
-            <hr />
-            <ng-scrollbar style="height: calc(100vh - 280px)" visibility="hover">
-              <div class="upgradeplan-block bg-light-warning rounded">
+               <input type="search" class="form-control" placeholder="Search profile options" />
+            </form> -->
+          
+            <ng-scrollbar style="height: calc(50vh - 280px)" visibility="hover">
+             <!--  <div class="upgradeplan-block bg-light-warning rounded">
                 <h4>Upgrade your plan</h4>
                 <p class="text-muted">
                   70% discount for 1 years
@@ -163,9 +164,10 @@
                 <a href="https://codedthemes.com/item/berry-angular-admin-dashboard-template/" target="_blank" class="btn btn-warning">
                   Go Premium
                 </a>
-              </div>
-              <hr />
-              <div class="settings-block bg-light-primary rounded">
+              </div>--->
+            
+
+              <!-- <div class="settings-block bg-light-primary rounded">
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
                   <label class="form-check-label" for="flexSwitchCheckDefault">Start DND Mode</label>
@@ -174,8 +176,8 @@
                   <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked />
                   <label class="form-check-label" for="flexSwitchCheckChecked">Allow Notifications</label>
                 </div>
-              </div>
-              <hr />
+              </div> -->
+            
               <a [routerLink]="['/guest/register']" class="dropdown-item">
                 <i class="ti ti-settings"></i>
                 <span>Account Profile</span>
@@ -188,7 +190,7 @@
                 <i class="ti ti-logout"></i>
                 <span>Logout</span>
               </a>
-            </ng-scrollbar>
+            </ng-scrollbar> 
           </div>
         </div>
       </div>

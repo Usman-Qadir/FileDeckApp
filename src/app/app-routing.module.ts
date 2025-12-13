@@ -28,6 +28,26 @@ const routes: Routes = [
       {
         path: 'sample-page',
         loadComponent: () => import('./demo/other/sample-page/sample-page.component').then((c) => c.SamplePageComponent)
+      },
+      {
+        path: 'myfile',
+        loadComponent: () => import('./demo/pages/myfile/myfile').then((c) => c.MyfileComponent)
+      }, 
+      {
+        path: 'shared',
+        loadComponent: () => import('./demo/pages/shared/shared').then((c) => c.Shared)
+      },
+       {
+        path: 'starred',
+        loadComponent: () => import('./demo/pages/starred/starred').then((c) => c.Starred)
+      },
+      {
+        path: 'recent',
+        loadComponent: () => import('./demo/pages/recent/recent').then((c) => c.Recent)
+      },
+      {
+        path: 'trash',
+        loadComponent: () => import('./demo/pages/trash/trash').then((c) => c.Trash)
       }
     ]
   },

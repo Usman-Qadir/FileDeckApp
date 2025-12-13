@@ -63,7 +63,7 @@ export const NavigationItems: NavigationItem[] = [
         title: 'Starred',
         type: 'item',
         classes: 'nav-item',
-        url: '/myfile',
+        url: '/starred',
         icon: 'ti ti-star',
         breadcrumbs: false
       },
@@ -72,7 +72,7 @@ export const NavigationItems: NavigationItem[] = [
         title: 'Recent',
         type: 'item',
         classes: 'nav-item',
-        url: '/myfile',
+        url: '/recent',
         icon: 'ti ti-wand',
         breadcrumbs: false
       },
@@ -81,7 +81,7 @@ export const NavigationItems: NavigationItem[] = [
         title: 'Trash',
         type: 'item',
         classes: 'nav-item',
-        url: '/myfile',
+        url: '/trash',
         icon: 'ti ti-trash',
         breadcrumbs: false
       },
