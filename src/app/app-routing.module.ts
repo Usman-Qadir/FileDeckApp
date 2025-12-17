@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './theme/layout/admin/admin.component';
 import { GuestComponent } from './theme/layout/guest/guest.component';
+import { filesRoutes } from './features/files/files.routes';
 
 const routes: Routes = [
   {
@@ -14,8 +15,12 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
+        path: 'files',
+        children: filesRoutes
+      },
+      {
         path: 'default',
-        loadComponent: () => import('./demo/dashboard/default/default.component').then((c) => c.DefaultComponent)
+        loadComponent: () => import('../app/features/dashboard/default/default.component').then((c) => c.DefaultComponent)
       },
       {
         path: 'typography',
@@ -37,11 +42,11 @@ const routes: Routes = [
     children: [
       {
         path: 'login',
-        loadComponent: () => import('./demo/pages/authentication/login/login.component').then((c) => c.LoginComponent)
+        loadComponent: () => import('../app/features/authentication/pages/login/login.component').then((c) => c.LoginComponent)
       },
       {
         path: 'register',
-        loadComponent: () => import('./demo/pages/authentication/register/register.component').then((c) => c.RegisterComponent)
+        loadComponent: () => import('../app/features/authentication/pages/register/register.component').then((c) => c.RegisterComponent)
       }
     ]
   }

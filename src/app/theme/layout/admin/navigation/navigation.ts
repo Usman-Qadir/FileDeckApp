@@ -38,50 +38,50 @@ export const NavigationItems: NavigationItem[] = [
     title: 'Pages',
     type: 'group',
     icon: 'icon-navigation',
-    
+
     children: [
-       { 
+      {
         id: 'myFile',
-        title: 'My File',
+        title: 'My Files',
         type: 'item',
         classes: 'nav-item',
-        url: '/myfile',
+        url: '/files/my-files',
         icon: 'ti ti-folder',
         breadcrumbs: false
       },
-      { 
+      {
         id: 'shared',
         title: 'Shared',
         type: 'item',
         classes: 'nav-item',
-        url: '/shared',
+        url: '/files/shared',
         icon: 'ti ti-share',
         breadcrumbs: false
       },
-      { 
+      {
         id: 'starred',
         title: 'Starred',
         type: 'item',
         classes: 'nav-item',
-        url: '/myfile',
+        url: '/files/starred',
         icon: 'ti ti-star',
         breadcrumbs: false
       },
-      { 
+      {
         id: 'recent',
         title: 'Recent',
         type: 'item',
         classes: 'nav-item',
-        url: '/myfile',
+        url: '/files/recent',
         icon: 'ti ti-wand',
         breadcrumbs: false
       },
-      { 
+      {
         id: 'delete',
         title: 'Trash',
         type: 'item',
         classes: 'nav-item',
-        url: '/myfile',
+        url: '/files/trash',
         icon: 'ti ti-trash',
         breadcrumbs: false
       },
@@ -110,7 +110,7 @@ export const NavigationItems: NavigationItem[] = [
         ]
       }
     ]
-  },
+  }
   // {
   //   id: 'elements',
   //   title: 'Elements',
