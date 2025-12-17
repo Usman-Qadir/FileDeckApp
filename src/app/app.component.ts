@@ -12,5 +12,5 @@ import { SpinnerComponent } from './theme/shared/components/spinner/spinner.comp
   imports: [RouterOutlet, SpinnerComponent]
 })
 export class AppComponent {
-  title = 'Berry Angular Free Version';
+  title = 'File Deck';
 }

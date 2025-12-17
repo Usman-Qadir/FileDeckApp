@@ -1,0 +1,141 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div class="auth-main">
+    <div class="auth-wrapper v3">
+      <div class="auth-form">
+        <div class="card mt-5">
+          <div class="card-body">
+
+            <a href="javascript:" class="d-flex justify-content-center mt-3">
+              <img src="assets/images/logo-dark.svg" alt="logo" />
+            </a>
+
+            <div class="d-flex justify-content-center">
+              <div class="auth-header">
+                <h2 class="text-secondary mt-5"><b>Sign up</b></h2>
+                <p class="fs-4 mt-2">Enter your credentials to continue</p>
+              </div>
+            </div>
+
+            <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted w-100">
+              <img src="assets/images/authentication/google-icon.svg" alt="google" />
+              Sign Up With Google
+            </button>
+
+            <div class="saprator mt-3">
+              <span>or</span>
+            </div>
+
+            <h5 class="my-4 d-flex justify-content-center">Sign Up with Email address</h5>
+
+            <!-- NAME ROW -->
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="firstNameInput"
+                         formControlName="firstName" placeholder="First Name" />
+                  <label for="firstNameInput">First Name</label>
+
+                  @if (f.firstName.touched && f.firstName.invalid) {
+                    <small class="text-danger">
+                      First name is required (min 2 characters)
+                    </small>
+                  }
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="lastNameInput"
+                         formControlName="lastName" placeholder="Last Name" />
+                  <label for="lastNameInput">Last Name</label>
+
+                  @if (f.lastName.touched && f.lastName.invalid) {
+                    <small class="text-danger">
+                      Last name is required (min 2 characters)
+                    </small>
+                  }
+                </div>
+              </div>
+            </div>
+
+            <!-- EMAIL -->
+            <div class="form-floating mb-3">
+              <input type="email" class="form-control" id="emailInput"
+                     formControlName="email" placeholder="Email" />
+              <label for="emailInput">Email Address</label>
+
+              @if (f.email.touched && f.email.invalid) {
+                <small class="text-danger">
+                  Enter a valid email
+                </small>
+              }
+            </div>
+
+            <!-- PASSWORD -->
+            <div class="form-floating mb-3 position-relative">
+              <input
+                [type]="showPassword() ? 'text' : 'password'"
+                class="form-control"
+                id="passwordInput"
+                formControlName="password"
+                placeholder="Password"
+              />
+
+              <label for="passwordInput">Password</label>
+
+              <span class="position-absolute top-50 end-0 translate-middle-y me-3"
+                    style="cursor: pointer;"
+                    (click)="showPassword.set(!showPassword())">
+                <i class="fa"
+                   [class.fa-eye]="!showPassword()"
+                   [class.fa-eye-slash]="showPassword()"></i>
+              </span>
+
+              @if (f.password.touched && f.password.invalid) {
+                <small class="text-danger">
+                  Password must be at least 6 characters
+                </small>
+              }
+            </div>
+
+            <!-- TERMS -->
+            <div class="form-check mt-3">
+              <input class="form-check-input input-primary"
+                     type="checkbox" id="customCheckc1"
+                     formControlName="agree" />
+              <label class="form-check-label" for="customCheckc1">
+                <h5>Agree with <span>Terms & Condition.</span></h5>
+              </label>
+
+              @if (f.agree.touched && f.agree.invalid) {
+                <small class="text-danger">You must agree to continue</small>
+              }
+            </div>
+
+            <!-- SUBMIT BUTTON -->
+            <div class="d-grid mt-4">
+              <button type="submit"
+                      class="btn btn-secondary p-2"
+                      [disabled]="registerForm.invalid || isLoading()">
+
+                @if (!isLoading()) {
+                  Sign Up
+                } @else {
+                  <span><i class="fa fa-spinner fa-spin"></i> Processing...</span>
+                }
+
+              </button>
+            </div>
+
+            <hr />
+
+            <h5 class="d-flex justify-content-center">
+              <a [routerLink]="['/login']">Already have an account?</a>
+            </h5>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
