@@ -1,5 +1,5 @@
-import { ApplicationConfig } from "@angular/core";
-import { provideHttpClient } from "@angular/common/http";
+import { ApplicationConfig } from '@angular/core';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
 export class BerryConfig {
   static isCollapse_menu = false;
@@ -7,7 +7,5 @@ export class BerryConfig {
 }
 
 export const appConfig: ApplicationConfig = {
-  providers: [
-    provideHttpClient()
-  ]
+  providers: [provideHttpClient()]
 };
