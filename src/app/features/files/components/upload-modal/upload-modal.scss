@@ -1,0 +1,40 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 24px;
+  width: 420px;
+  border-radius: 12px;
+  z-index: 1001;
+}
+
+.drop-zone {
+  border: 2px dashed #3f51b5;
+  padding: 24px;
+  text-align: center;
+  margin-bottom: 16px;
+  border-radius: 8px;
+}
+
+.btn {
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+.primary {
+  background: #3f51b5;
+  color: white;
+}
+
+.danger {
+  background: #ccc;
+}
