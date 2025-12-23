@@ -2,10 +2,7 @@
   <div class="card-header d-flex justify-content-between align-items-center">
     <h5 class="mb-0">My Files</h5>
 
-    <button
-      type="button"
-      class="btn btn-primary"
-      (click)="openUpload()">
+    <button type="button" class="btn btn-primary" (click)="openUpload()">
       <i class="feather icon-upload me-1"></i>
       Upload
     </button>
@@ -17,4 +14,46 @@
 
   <!-- Upload modal -->
   <app-upload-modal #uploadModal></app-upload-modal>
+</div>
+
+<!-- Uploaded files card (new) -->
+<div class="card mt-3">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h5 class="mb-0">Uploaded Files</h5>
+
+    <div class="d-flex align-items-center">
+      <button type="button" class="btn btn-outline-secondary me-2" (click)="refreshFiles()">
+        <i class="feather icon-refresh-ccw me-1"></i>
+        Refresh
+      </button>
+      <div class="text-muted small">Total: {{ uploadedFiles?.length || 0 }}</div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <ng-container *ngIf="uploadedFiles && uploadedFiles.length; else emptyState">
+      <div class="row g-3">
+        <div class="col-12 col-md-6 col-lg-4" *ngFor="let f of uploadedFiles; trackBy: trackByName">
+          <div class="card file-card h-100">
+            <div class="card-body d-flex justify-content-between align-items-start">
+              <div>
+                <h6 class="mb-1 text-truncate">{{ f.name }}</h6>
+                <div class="small text-muted">{{ f.size | fileSize }}</div>
+              </div>
+              <div class="ms-2 text-end">
+                <button class="btn btn-sm btn-outline-primary" (click)="downloadFile(f)">Download</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #emptyState>
+      <div class="text-center py-5 text-muted">
+        <i class="feather icon-folder-plus fs-1 mb-3"></i>
+        <div>No uploaded files yet. Use the Upload button above to add files.</div>
+      </div>
+    </ng-template>
+  </div>
 </div>
