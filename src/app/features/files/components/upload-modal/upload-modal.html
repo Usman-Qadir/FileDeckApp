@@ -1,13 +1,65 @@
-<p-dialog
-  header="Upload Files"
-  [(visible)]="visible"
-  modal="true"
-  dismissableMask="true">
+<p-dialog header="Upload Files" [(visible)]="visible" modal="true" dismissableMask="true" [style]="{width: '640px'}">
+  <div class="modal-content">
+    <!-- Hidden PrimeNG FileUpload used to access native file input -->
+    <p-fileUpload
+      #fileUpload
+      name="files[]"
+      [multiple]="true"
+      accept="*/*"
+      [customUpload]="true"
+      (onSelect)="onSelect($event)"
+      [auto]="false"
+      [showUploadButton]="false"
+      [showCancelButton]="false"
+      styleClass="d-none"
+    ></p-fileUpload>
 
-  <p-fileUpload
-    mode="basic"
-    [multiple]="true"
-    [auto]="false">
-  </p-fileUpload>
+    <div class="drop-zone" (drop)="$event.preventDefault(); $event.stopPropagation();" (dragover)="$event.preventDefault()">
+      <p class="drag-text">Drag & drop files here</p>
+      <p class="or-text">or</p>
+      <button class="btn btn-primary" (click)="fileUpload.choose()">
+        <i class="ti ti-upload"></i>
+        Browse files
+      </button>
+      <p class="help-text">No filetype restrictions. Select up to 10 files.</p>
+    </div>
 
+    <div *ngIf="selectedFiles.length > 0" class="files-list">
+      <h4>Selected files ({{ selectedFiles.length }}):</h4>
+      <ul>
+        <li *ngFor="let file of selectedFiles; trackBy: trackByName" class="file-item">
+          <div class="file-info">
+            <i class="ti ti-file"></i>
+            <div class="file-details">
+              <span class="file-name">{{ file.name }}</span>
+              <span class="file-size">{{ (file.size / 1024) | number:'1.0-2' }} KB</span>
+            </div>
+          </div>
+          <button class="remove-btn" (click)="removeFile(file.name)" [disabled]="isUploading"><i class="ti ti-x"></i></button>
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="isUploading" class="progress-container">
+      <div class="progress-label">Uploading {{ uploadProgress | number:'1.0-0' }}%</div>
+      <p-progressBar [value]="uploadProgress" [showValue]="false"></p-progressBar>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" (click)="upload()" [disabled]="selectedFiles.length === 0 || isUploading">
+        <span *ngIf="isUploading">
+          <i class="ti ti-loader-2"></i>
+          Uploading...
+        </span>
+        <span *ngIf="!isUploading">
+          <i class="ti ti-upload"></i>
+          Upload
+        </span>
+      </button>
+      <button class="btn btn-secondary" (click)="close()" [disabled]="isUploading">
+        <i class="ti ti-x"></i>
+        Cancel
+      </button>
+    </div>
+  </div>
 </p-dialog>
