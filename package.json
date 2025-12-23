@@ -32,8 +32,12 @@
     "bootstrap": "5.3.7",
     "ng-apexcharts": "1.16.0",
     "ngx-scrollbar": "18.0.0",
+<<<<<<< HEAD
     "primeicons": "^7.0.0",
     "primeng": "^20.4.0",
+=======
+    "primeng": "^19.0.0",
+>>>>>>> 193895d (my files)
     "rxjs": "~7.8.2",
     "tslib": "2.8.1",
     "zone.js": "~0.15.1"

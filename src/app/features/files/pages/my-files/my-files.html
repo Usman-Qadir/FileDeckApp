@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="card">
   <div class="card-header d-flex justify-content-between align-items-center">
     <h5 class="mb-0">My Files</h5>
@@ -18,3 +19,39 @@
   <!-- Upload modal -->
   <app-upload-modal #uploadModal></app-upload-modal>
 </div>
+=======
+<div class="my-files-container">
+  <div class="files-header">
+    <div class="header-content">
+      <h2 class="files-title">My Files</h2>
+      <p class="files-subtitle">Manage and organize your uploaded files</p>
+    </div>
+    <button class="btn btn-primary" (click)="openUploadModal()">
+      <i class="ti ti-upload"></i>
+      Upload Files
+    </button>
+  </div>
+
+  <div class="files-content">
+    <!-- Empty State -->
+    <div class="empty-state">
+      <div class="empty-icon">
+        <i class="ti ti-folder-open"></i>
+      </div>
+      <h3>No files yet</h3>
+      <p>Start by uploading your first file</p>
+      <button class="btn btn-primary" (click)="openUploadModal()">
+        <i class="ti ti-upload"></i>
+        Upload Files
+      </button>
+    </div>
+
+    <!-- Files Table/Grid would go here -->
+  </div>
+</div>
+
+<!-- Upload Modal -->
+@if (showUploadModal) {
+<app-upload-modal (closeModal)="closeUploadModal()"></app-upload-modal>
+}
+>>>>>>> 193895d (my files)
