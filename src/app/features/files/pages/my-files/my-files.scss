@@ -1,0 +1,66 @@
+.my-files-card {
+  .card-header input {
+    min-width: 200px;
+  }
+}
+
+.file-card {
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+  cursor: default;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  }
+}
+
+.file-thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: var(--bs-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  //   i {
+  //     font-size: 22px;
+  //     color: var(--bs-primary);
+  //   }
+}
+
+.actions button {
+  padding: 0.25rem 0.4rem;
+}
+
+/* Skeleton loader */
+.skeleton-card {
+  height: 140px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 37%, #f0f0f0 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 1rem;
+  color: #6c757d;
+
+  i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+}

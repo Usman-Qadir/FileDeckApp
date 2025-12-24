@@ -1,6 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Output, EventEmitter, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FileUploadModule } from 'primeng/fileupload';
 import { DialogModule } from 'primeng/dialog';
 import { ProgressBarModule } from 'primeng/progressbar';
 
@@ -13,12 +12,13 @@ interface UploadedFile {
 @Component({
   selector: 'app-upload-modal',
   standalone: true,
-  imports: [CommonModule, DialogModule, FileUploadModule, ProgressBarModule],
+  imports: [CommonModule, DialogModule, ProgressBarModule],
   templateUrl: './upload-modal.html',
   styleUrls: ['./upload-modal.scss']
 })
 export class UploadModal {
-  @ViewChild('fileUpload') fileUpload: any;
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+  @Output() uploaded = new EventEmitter<void>();
 
   visible = false;
   selectedFiles: UploadedFile[] = [];
@@ -35,20 +35,44 @@ export class UploadModal {
     this.uploadProgress = 0;
     this.isUploading = false;
     try {
-      if (this.fileUpload && this.fileUpload.clear) this.fileUpload.clear();
+      if (this.fileInput && this.fileInput.nativeElement) this.fileInput.nativeElement.value = '';
     } catch {}
   }
 
   onSelect(event: any) {
-    const files: File[] = event.files || [];
+    // support PrimeNG event shape or FileList
+    const files: File[] = event?.files || (event?.target?.files ? Array.from(event.target.files) : []);
+    this.addFiles(files);
+    try {
+      if (this.fileInput && this.fileInput.nativeElement) this.fileInput.nativeElement.value = '';
+    } catch {}
+  }
+
+  onFileInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (!input?.files) return;
+    this.addFiles(Array.from(input.files));
+    input.value = '';
+  }
+
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    const dt = event.dataTransfer;
+    if (!dt) return;
+    this.addFiles(Array.from(dt.files || []));
+  }
+
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+  }
+
+  private addFiles(files: File[]) {
     files.forEach((f) => {
       if (!this.selectedFiles.some((sf) => sf.name === f.name && sf.size === f.size)) {
         this.selectedFiles.push({ file: f, name: f.name, size: f.size });
       }
     });
-    try {
-      if (this.fileUpload && this.fileUpload.clear) this.fileUpload.clear();
-    } catch {}
   }
 
   removeFile(fileName: string) {
@@ -75,6 +99,9 @@ export class UploadModal {
       clearInterval(progressInterval);
       if (res.ok) {
         this.uploadProgress = 100;
+        try {
+          this.uploaded.emit();
+        } catch {}
         setTimeout(() => this.close(), 400);
       } else {
         console.error('Upload failed', res.statusText);

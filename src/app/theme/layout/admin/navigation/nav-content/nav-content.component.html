@@ -1,17 +1,6 @@
 <!-- Vertical layout -->
 <ng-scrollbar style="height: calc(100vh - 70px)" visibility="hover">
-  <!-- ⭐ Add Upload Button Here -->
-<div class="p-3">
-  <button class="btn btn-primary w-full" >
-    <i class="ti ti-upload"></i> Upload File
-  </button>
-
-  <!-- Hidden file input -->
-  <input type="file" #fileInput style="display:none"  />
-</div>
   <div class="navbar-content">
-
-    
     <ul class="nav coded-inner-navbar" (click)="fireOutClick()" (keydown.space)="fireOutClick()" (keydown.enter)="fireOutClick()">
       @for (item of navigations; track item) {
         @if (item.type === 'group') {

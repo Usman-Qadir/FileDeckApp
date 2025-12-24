@@ -1,59 +1,86 @@
-<div class="card">
+<div class="card my-files-card">
+  <!-- Header -->
   <div class="card-header d-flex justify-content-between align-items-center">
-    <h5 class="mb-0">My Files</h5>
+    <div>
+      <h4 class="mb-0">My Files</h4>
+      <small class="text-muted">Manage and preview your uploaded files</small>
+    </div>
 
-    <button type="button" class="btn btn-primary" (click)="openUpload()">
-      <i class="feather icon-upload me-1"></i>
-      Upload
-    </button>
-  </div>
+    <div class="d-flex align-items-center gap-2">
+      <!-- <input
+        class="form-control form-control-sm"
+        placeholder="Search files..."
+        [value]="search()"
+        (input)="search.set($any($event.target).value)"
+      /> -->
 
-  <div class="card-body">
-    <!-- Files list / table / grid will go here -->
-  </div>
-
-  <!-- Upload modal -->
-  <app-upload-modal #uploadModal></app-upload-modal>
-</div>
-
-<!-- Uploaded files card (new) -->
-<div class="card mt-3">
-  <div class="card-header d-flex justify-content-between align-items-center">
-    <h5 class="mb-0">Uploaded Files</h5>
-
-    <div class="d-flex align-items-center">
-      <button type="button" class="btn btn-outline-secondary me-2" (click)="refreshFiles()">
-        <i class="feather icon-refresh-ccw me-1"></i>
-        Refresh
+      <button class="btn btn-outline-secondary" title="Refresh" (click)="refreshFiles()">
+        <i class="ti ti-refresh"></i>
       </button>
-      <div class="text-muted small">Total: {{ uploadedFiles?.length || 0 }}</div>
+
+      <button class="btn btn-primary" (click)="openUpload()">
+        <i class="ti ti-upload"></i>
+        Upload File
+      </button>
     </div>
   </div>
 
+  <!-- Body -->
   <div class="card-body">
-    <ng-container *ngIf="uploadedFiles && uploadedFiles.length; else emptyState">
-      <div class="row g-3">
-        <div class="col-12 col-md-6 col-lg-4" *ngFor="let f of uploadedFiles; trackBy: trackByName">
-          <div class="card file-card h-100">
-            <div class="card-body d-flex justify-content-between align-items-start">
-              <div>
-                <h6 class="mb-1 text-truncate">{{ f.name }}</h6>
+    @if (loading()) {
+    <!-- Loading skeleton -->
+    <div class="row g-3">
+      @for (_ of [1,2,3,4,5,6,7,8]; track _) {
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="skeleton-card"></div>
+      </div>
+      }
+    </div>
+    } @else if (filteredFiles().length > 0) {
+    <!-- Files -->
+    <div class="row g-3">
+      @for (f of filteredFiles(); track f.name) {
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="card file-card h-100">
+          <div class="card-body d-flex flex-column justify-content-between">
+            <div class="d-flex gap-3">
+              <div class="file-thumb">
+                <i [class]="fileIcon(f.name)"></i>
+              </div>
+
+              <div class="flex-grow-1 min-width-0">
+                <div class="fw-semibold text-truncate">{{ f.name }}</div>
                 <div class="small text-muted">{{ f.size | fileSize }}</div>
               </div>
-              <div class="ms-2 text-end">
-                <button class="btn btn-sm btn-outline-primary" (click)="downloadFile(f)">Download</button>
+            </div>
+
+            <div class="mt-3 d-flex justify-content-between align-items-center">
+              <div class="small text-muted">{{ f.uploadedAt ? (f.uploadedAt | date:'short') : '' }}</div>
+
+              <div class="actions">
+                <button class="btn btn-sm btn-link" title="Download" (click)="downloadFile(f)">
+                  <i class="feather icon-download"></i>
+                </button>
+
+                <button class="btn btn-sm btn-link text-danger" title="Delete" (click)="deleteFile(f)">
+                  <i class="feather icon-trash-2"></i>
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </ng-container>
-
-    <ng-template #emptyState>
-      <div class="text-center py-5 text-muted">
-        <i class="feather icon-folder-plus fs-1 mb-3"></i>
-        <div>No uploaded files yet. Use the Upload button above to add files.</div>
-      </div>
-    </ng-template>
+      }
+    </div>
+    } @else {
+    <!-- Empty state -->
+    <div class="empty-state">
+      <i class="feather icon-folder-plus"></i>
+      <div>No uploaded files yet</div>
+      <small>Use the Upload button to add files</small>
+    </div>
+    }
   </div>
+
+  <app-upload-modal #uploadModal (uploaded)="refreshFiles()" />
 </div>
